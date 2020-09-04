@@ -1,0 +1,31 @@
+{% extends 'prediction_model/index.html' %}
+{% block content %}
+{% load static %}
+
+    <div class="container p-4">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <select id="country_select" class="form-control">
+                    <option selected></option>
+                    {% for i in countries %}
+                        <option>{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <!--<div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Country</h5>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="container p-4" url-endpoint = "{% url 'api' %}">
+            <canvas id="Mychart" width="400" height="400"></canvas>
+        </div>
+
+
+    </div>
+{% endblock %}

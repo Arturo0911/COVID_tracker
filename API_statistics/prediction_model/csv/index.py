@@ -1,8 +1,11 @@
 import csv
 from datetime import datetime
 list_results = []
-def create_data(filter):
+list_country = []
+list_chart_regretion = []
 
+
+def create_data(filter): # Only test filter to parser datetime
 
     with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as CSVfile:
         reader = csv.DictReader(CSVfile)
@@ -15,11 +18,28 @@ def create_data(filter):
 
     return list_results
     
+def get_countries(): # Get Countries from csv file, to send to make select and option tag =>  HTML 
 
+    with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as Country_file:
+        country = csv.DictReader(Country_file)
+
+        for x in country:
+            if (x['Country'] not in list_country):
+                list_country.append(x['Country'])
+
+    return list_country
     
     
 
+def chart_cases(country):
+    with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as Cases_file:
+        cases_reader = csv.DictReader(Cases_file)
 
+        for i in cases_reader:
+            if (i['Country'] == country):
+                list_chart_regretion.append({'x': i['Cumulative_cases'], 'y':i['Cumulative_deaths']})
+    
+    return list_chart_regretion
 
 
 

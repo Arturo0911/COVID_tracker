@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'country' %}">Country selector <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="#">Features</a>
@@ -42,10 +42,10 @@
       </nav>
 
 
+    {% block content %}{% endblock %}
 
 
-
-    <div class="container p-4">
+    <!--<div class="container p-4">
       <div class="row">
        {% for corona in covid %}
         <div class="col-md-2">
@@ -62,7 +62,7 @@
        {% endfor %}
       </div>
       
-    </div>
+    </div>-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script
@@ -75,5 +75,7 @@
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="{% static 'prediction_model/js/main.js' %}"></script>
   </body>
 </html>
