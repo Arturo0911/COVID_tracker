@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
     const Selector = document.getElementById('country_select');
+    const Filter = document.getElementById('filter_select');
     let datos = [];
     
 
@@ -23,50 +24,25 @@ $(document).ready(function(){
         });
         $.ajax({
             method:"GET",
-            url: `http://127.0.0.1:8000/country_reponse/${Selector.value}`,
+            url: `http://127.0.0.1:8000/country_reponse/${Selector.value}/${Filter.value}`,
             success: function(data){
-                datos = data;
+                //datos = data;
                 console.log(data);
                 const ctx = document.getElementById('Mychart').getContext('2d');
                 var scatterChart = new Chart(ctx, {
-                    type: 'scatter',
+                    type: 'line',
                     data: {
+                    labels: ['Enero', 'Febrero', 'Marzo'],
                     datasets: [{
                         label: 'Scatter Dataset',
                         backgroundColor: 'rgb(255, 99, 132)',
                         borderColor: 'rgb(255, 99, 132)',
-                        data: data['cases']
-                        /*data: [{
-                            x: 3,
-                            y: 5
-                        }, {
-                            x: 7,
-                            y: 8
-                        }, {
-                            x: 8,
-                            y: 8
-                        },{
-                            x: 9,
-                            y: 10
-                        },{
-                            x: 4,
-                            y: 3
-                        },{
-                            x: 2,
-                            y: 2
-                        },{
-                            x: 5,
-                            y: 3
-                        },{
-                            x: 10,
-                            y: 8
-                        },{
-                            x: 8,
-                            y: 9
-                        },{
-                            x: 7,
-                            y: 8
-                        }]*/
+                        data: [25,30,66],
+                        //data: data['cases'],
+                        pointRadius: 0,
+                        lineTension: 0,
+                        borderWidth: 2,
+                        fill: false
                     }]
                 },
                     options: {
@@ -75,7 +51,10 @@ $(document).ready(function(){
                                 type: 'linear',
                                 position: 'bottom'
                                 }]
-                            }
+                            },
+                        animation:{
+                            duration:0
+                        }
                         }
                     });
             }

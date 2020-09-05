@@ -19,6 +19,11 @@ def Index(request): # url index
     # {'covid':index.create_data('Ecuador')}
     return render(request, 'prediction_model/index.html')
 
+def Link(request):
+
+    return render(request, 'prediction_model/content.html')
+
+
 def Country_selector(request):  # url country
     country_values = index.get_countries()
     
@@ -39,9 +44,19 @@ def Country_get_data(request): # url api
     
 
 
-def get_values_to_country(request, country): # get country_response
-    cases_ = {'cases':index.chart_cases(country)}
-    print(cases_)
+def get_values_to_country(request, country,filter): # get country_response
+    #print(filter)
+    
+    
+
+    #print(index.get_by_month('Peru'))
+    index.get_by_day(country, 'Aug')
+    cases_ = {'cases':index.get_by_day(country, 'Aug')}
+    # cases_ = {'cases':index.chart_cases(country)}
+
+
+
+    #print(cases_)
     return JsonResponse(cases_)
 
 

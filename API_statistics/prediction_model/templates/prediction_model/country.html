@@ -3,17 +3,37 @@
 {% load static %}
 
     <div class="container p-4">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <select id="country_select" class="form-control">
-                    <option selected></option>
-                    {% for i in countries %}
-                        <option>{{ i }}</option>
-                    {% endfor %}
-                </select>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Select country</h5>
+                        <select id="country_select" class="form-control">
+                            <option selected></option>
+                            {% for i in countries %}
+                                <option>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>Select filter</h5>
+                        <select id="filter_select" class="form-control">
+                            <option selected>Month </option>
+                            <option>Day</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
-
+        <div class="col-md-12">
+            <div class="container p-4" url-endpoint = "{% url 'api' %}">
+                <canvas id="Mychart" width="400" height="400"></canvas>
+            </div>
+        </div>
         <!--<div class="row">
             <div class="card">
                 <div class="card-header">
@@ -22,9 +42,7 @@
             </div>
         </div>-->
 
-        <div class="container p-4" url-endpoint = "{% url 'api' %}">
-            <canvas id="Mychart" width="400" height="400"></canvas>
-        </div>
+        
 
 
     </div>

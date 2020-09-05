@@ -16,10 +16,11 @@
     />
     <link rel="stylesheet" href="{% static 'prediction_model/css/style.css' %}">
     <title>Covid Analizer</title>
+    <link rel="shortcut icon" href="{% static 'prediction_model/icons/ciencias.ico' %}">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <strong><a class="navbar-brand" href="#">Covid Tracker</a></strong>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <strong><a class="navbar-brand" href="{% url 'info' %}">Covid Tracker <img src="{% static 'prediction_model/icons/chart.png' %}" alt=""></a></strong>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,41 +29,25 @@
             <li class="nav-item active">
               <a class="nav-link" href="{% url 'country' %}">Country selector <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
+
+            <!--<li class="nav-item active">
               <a class="nav-link" href="#">Features</a>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="#">Pricing</a>
             </li>
             <li class="nav-item active">
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Documentation links</a>
+            </li>-->
           </ul>
         </div>
       </nav>
 
 
     {% block content %}{% endblock %}
+    {% block link %}{% endblock %}
 
-
-    <!--<div class="container p-4">
-      <div class="row">
-       {% for corona in covid %}
-        <div class="col-md-2">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="card-title">{{ corona.Fecha }}</h5>
-            </div>
-            <div class="card-body">
-              <h5>{{ corona.Nuevos_casos}}</h5>
-            </div>
-          </div>
-        </div>
-
-       {% endfor %}
-      </div>
-      
-    </div>-->
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script
