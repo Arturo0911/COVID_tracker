@@ -8,9 +8,11 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .parser import json_parser
 
+"""
+    # url index
+"""
 
-
-def Index(request): # url index
+def Index(request): 
 
     #print(index.create_data())
     #for x in index.create_data('Ecuador'):
@@ -44,20 +46,13 @@ def Country_get_data(request): # url api
     
 
 
-def get_values_to_country(request, country,filter): # get country_response
-    #print(filter)
+def get_values_to_country(request, country): # get country_response
     
-    
+    return JsonResponse({'cases':index.get_by_month(country)})
 
-    #print(index.get_by_month('Peru'))
-    index.get_by_day(country, 'Aug')
-    cases_ = {'cases':index.get_by_day(country, 'Aug')}
-    # cases_ = {'cases':index.chart_cases(country)}
-
-
-
-    #print(cases_)
-    return JsonResponse(cases_)
+def get_values_to_death_by_country(request, country):
+    print(index.fetch_deaths_acumulative(country))
+    return JsonResponse({'deaths':index.fetch_deaths_acumulative(country)})
 
 
     

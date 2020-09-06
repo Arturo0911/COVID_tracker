@@ -1,5 +1,9 @@
 import csv
 from datetime import datetime
+
+# In each list we put function that already involves
+
+
 list_results = [] # create_data()
 list_country = [] # get_countries()
 list_chart_regretion = [] #chart_cases()
@@ -7,7 +11,27 @@ list_chart_series = [] #time_series_chart()
 list_get_by_month = [] # get_by_month()
 
 
-def create_data(filter): # Only test filter to parser datetime
+month_list = [] # get_by_month()
+total_list = [] # get_by_month()
+country_filter = {} # get_by_month() => this is a object to render in chart js
+
+
+day_list = [] # get_by_day()
+total_list = [] # get_by_day()
+object_days = {} # get_by_day()
+
+death_list = [] # fetch_deaths_acumulative()
+get_list_by_death = [] # fetch_deaths_acumulative()
+total_death_list = [] # fetch_deaths_acumulative()
+object_deaths = {} # fetch_deaths_acumulative()
+
+
+
+
+"""
+    # Only test filter to parser datetime
+"""
+def create_data(filter):
 
     with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as CSVfile:
         reader = csv.DictReader(CSVfile)
@@ -19,8 +43,12 @@ def create_data(filter): # Only test filter to parser datetime
         #print(reader.fieldnames)
 
     return list_results
-    
-def get_countries(): # Get Countries from csv file, to send to make select and option tag =>  HTML 
+
+
+"""
+    # Get Countries from csv file, to send to make select and option tag =>  HTML 
+"""
+def get_countries(): 
 
     with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as Country_file:
         country = csv.DictReader(Country_file)
@@ -32,7 +60,10 @@ def get_countries(): # Get Countries from csv file, to send to make select and o
     return list_country
     
     
-
+"""
+    # This one was to get from csv file data about acumulative cases by all 8 months over 
+    # cumulatives deaths.
+"""
 def chart_cases(country):
     with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as Cases_file:
         cases_reader = csv.DictReader(Cases_file)
@@ -45,7 +76,10 @@ def chart_cases(country):
 
 
 
-def time_series_chart(): # this one is to get by day on month or global 
+"""
+    # this one is to get by day on month or global 
+"""
+def time_series_chart(): 
     with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as CSVfile:
         reader = csv.DictReader(CSVfile)
         for x in reader:
@@ -54,37 +88,92 @@ def time_series_chart(): # this one is to get by day on month or global
 
     return list_chart_series
 
-def get_by_month(country): # here to filter using country but in chart time series using month to generate chart
 
-    month_list = []
-    total_list = []
 
-    with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as CSVfile:
-        reader = csv.DictReader(CSVfile)
-        for x in reader:
-            if(x['Country'] == country):
-                list_get_by_month.append({'Fecha':datetime.strftime(datetime.strptime(x['Date_reported'], '%Y-%m-%d'),'%b'), 'Nuevos_casos':x['New_cases']})
-                fecha_append = datetime.strftime(datetime.strptime(x['Date_reported'], '%Y-%m-%d'),'%b')
-                if (fecha_append not in month_list):
-                    month_list.append(fecha_append)
 
-    for z in month_list:
-        suma = 0
-        for a in list_get_by_month:
-            #print(suma)
-            if (a['Fecha']==z):
+
+
+"""
+    # here to filter using country but in chart time series using month to generate chart
+    # this one is to fetch cases infected
+"""
+def get_by_month(country): 
+    if(country not in country_filter):
+        country_filter.clear()
+        total_list.clear()
+        month_list.clear()
+        list_get_by_month.clear()
+
+        with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as CSVfile:
+            reader = csv.DictReader(CSVfile)
+            
+            for x in reader:
+                if(x['Country'] == country):
+                    list_get_by_month.append({'Fecha':datetime.strftime(datetime.strptime(x['Date_reported'], '%Y-%m-%d'),'%b'), 'Nuevos_casos':x['New_cases']})
+                    fecha_append = datetime.strftime(datetime.strptime(x['Date_reported'], '%Y-%m-%d'),'%b')
+                    if (fecha_append not in month_list):
+                        month_list.append(fecha_append)
+
+        for z in month_list:
+            suma = 0
+            for a in list_get_by_month:
                 
-                suma = suma + int(a['Nuevos_casos'])
-    
-        total_list.append({'Mes':z, 'Casos_by_month':suma})
+                if (a['Fecha']==z):
+                    
+                    suma = suma + int(a['Nuevos_casos'])
+        
+            total_list.append({'Mes':z, 'casos':suma})
+        country_filter[country] = total_list
+        return country_filter[country]
+    else:
+        return country_filter[country]
 
-    return total_list
 
 
+
+
+
+def fetch_deaths_acumulative(country):
+    if(country not in object_deaths):
+        object_deaths.clear()
+        total_death_list.clear() # sumatory about cases
+        death_list.clear() # this is to fetch months per cases
+        get_list_by_death.clear() # to fetch all data
+
+        with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as CSVfile:
+            reader = csv.DictReader(CSVfile)
+            
+            for x in reader:
+                if(x['Country'] == country):
+                    get_list_by_death.append({'Fecha':datetime.strftime(datetime.strptime(x['Date_reported'], '%Y-%m-%d'),'%b'), 'Muertes':x['New_deaths']})
+                    fecha_append = datetime.strftime(datetime.strptime(x['Date_reported'], '%Y-%m-%d'),'%b')
+                    if (fecha_append not in death_list):
+                        death_list.append(fecha_append)
+
+        for z in death_list:
+            suma = 0
+            for a in get_list_by_death:
+                
+                if (a['Fecha']==z):
+                    
+                    suma = suma + int(a['Muertes'])
+        
+            total_death_list.append({'Mes':z, 'muertes':suma})
+        object_deaths[country] = total_death_list
+        return object_deaths[country]
+    else:
+        return object_deaths[country]
+
+
+
+
+"""
+    # this function was to send JSON object with filtering by month to
+    # fetch by day cases COVID-19
+"""
+"""
 def get_by_day(country, month):
-    day_list = []
-    total_list = []
-    object_days = {}
+    
     with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as CSVfile:
         reader = csv.DictReader(CSVfile)
 
@@ -99,9 +188,6 @@ def get_by_day(country, month):
 
     for i in range(1, quantity_days+1):
         object_days[i] = total_list[i-1]
-    
+    print(len(object_days))
     return object_days
-
-
-
-
+"""
