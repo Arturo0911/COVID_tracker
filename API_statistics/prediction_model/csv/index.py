@@ -26,6 +26,7 @@ total_death_list = [] # fetch_deaths_acumulative()
 object_deaths = {} # fetch_deaths_acumulative()
 
 
+#def main():
 
 
 """
