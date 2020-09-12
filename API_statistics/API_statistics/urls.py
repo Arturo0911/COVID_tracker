@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('prediction_model.urls')),
     path('general/', include('general_model.urls')),
+    path('users/', include('client.urls')),
 ]

@@ -1,19 +1,32 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from .csv import index
+from .csv import index, main
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 # Modules
 import json
 from .parser import json_parser
-
+from datetime import datetime as dt
 """
     # url index
 """
 
 def Index(request): 
 
+    while True:
+        now_time = dt.now()
+        current__ = now_time.strftime("%H:%M")
+
+        print(current__)
+
+
+        if (current__ > "02:50"):
+            print("Son más de las dos am")
+            break
+        else:
+            print("son menos de las dos am ")
+            break
     #print(index.create_data())
     #for x in index.create_data('Ecuador'):
     #    print(x)
