@@ -7,7 +7,8 @@ import json
 
 
 def index_general(request):
-    return JsonResponse(api._create_object())
+    #api._create_object()
+    return JsonResponse({'value': 'Reactjs'})
 
 def general_page(request):
 
