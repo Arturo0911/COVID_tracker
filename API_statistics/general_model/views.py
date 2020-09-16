@@ -4,7 +4,7 @@ from .api_functions import api
 # Create your views here.
 
 def index_general(request):
-    # api.Generate()
+    api.Generate()
     return HttpResponse("Holis xD")
 
 def general_page(request):

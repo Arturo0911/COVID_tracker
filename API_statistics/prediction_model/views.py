@@ -16,16 +16,12 @@ def Index(request):
 
     while True:
         now_time = dt.now()
-        current__ = now_time.strftime("%H:%M")
-
-        print(current__)
-
-
-        if (current__ > "02:50"):
-            print("Son más de las dos am")
+        current = now_time.strftime("%H:%M")
+        print(current > "02:50")
+        if (current > "02:50"):
+            main.Fetch_csv()
             break
         else:
-            print("son menos de las dos am ")
             break
     #print(index.create_data())
     #for x in index.create_data('Ecuador'):
