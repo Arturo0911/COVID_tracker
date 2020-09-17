@@ -8,12 +8,18 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .parser import json_parser
 from datetime import datetime as dt
+
+
+# Modules externals
+from general_model.api_functions import api
+
+
 """
     # url index
 """
 
 def Index(request): 
-
+    api._create_object()
     while True:
         now_time = dt.now()
         current = now_time.strftime("%H:%M")
