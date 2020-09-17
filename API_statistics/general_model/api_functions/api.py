@@ -45,13 +45,15 @@ def Generate(country):
 
 def _create_object():
 
-    list_general = {}
+    #list_general = {}
+    list_values = []
 
     countries = _create_country_list()
 
     for x in countries:
 
-        list_general[x] = Generate(x) 
+        #list_general[x] = Generate(x)
+        list_values.append({'Country': x, 'Cases':Generate(x)})
 
-    return list_general
+    return list_values
                     
