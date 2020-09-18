@@ -51,6 +51,9 @@ def _create_object():
 
     countries = _create_country_list()
 
+    if (len(Universal_cases.objects.all()) > 0):
+        Universal_cases.objects.all().delete()
+
     for x in countries:
 
         #list_general[x] = Generate(x)

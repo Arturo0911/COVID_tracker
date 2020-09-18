@@ -3,54 +3,44 @@ import React, { useEffect, useState } from 'react';
 
 export const Chart = (props) => {
 
-    //const APIDjango = "http://127.0.0.1:8000/general/" // Django api
-    const jsonAPI = "https://jsonplaceholder.typicode.com/posts"; // Json placeholder examples
+    const APIDjango = "http://127.0.0.1:8000/general/" // Django api
     const [djangoApi, SetApi] = useState([]);
 
     const FetchData = async () => {
-
-        await fetch(jsonAPI)
+        await fetch(APIDjango)
             .then(response => response.json())
-            .then(response => SetApi(response))
-
-
-
-        /*let r = await fetch(jsonAPI);
-        const data = await r.json();
-        SetApi(data)*/
+            .then(response => SetApi(response.data))
     };
-    //console.log(typeof(djangoApi));
-    //console.log(djangoApi);
+    
     useEffect(() => {
         FetchData();
-        /*axios.get(jsonAPI)
-            //.then((response)=> response.json())
-            .then(res => {SetApi(res.data)})
-            .catch(err => console.log(err))*/
     }, []);
 
 
-    console.log(djangoApi);
+    //console.log(djangoApi);
 
     return (
         <div>
             <div className="container p-4">
-                <table className="table">
-                    <thead>
+                <table className="table table-hover table-sm">
+                    <thead className= "thead-dark">
                         <tr>
-                            <th>Id del usuario</th>
-                            <th>Id </th>
-                            <th> titulo </th>
-                            
+                            <th scope="col">Country</th>
+                            <th scope="col">Casos en total </th>
+                            <th scope="col">Actions </th>
                         </tr>
                     </thead>
                     <tbody>
                             {
                                 djangoApi.map((element, id) => (
                                     <tr key={id}>
-                                        <td>{element.userId}</td>
-                                        <td>{element.id}</td>
-                                        <td>{element.title}</td>
+                                        
+                                        <th scope="row">{element.country}</th>
+                                        <td>{element.casos}</td>
+                                        <td>
+                                            <a href="#" className = "btn btn-info">Visualizar</a>
+                                        </td>
+                                       
                                     </tr>
                                 ))
                             }
