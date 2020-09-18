@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
  */
 
 import {Chart} from '../router/chart';
-
+import {Map} from '../router/map';
 
 /**
  * Import images
@@ -34,13 +34,13 @@ export const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item active">
-                                <Link to = "home/" className="nav-link">Home <span className="sr-only">(current)</span></Link>
+                                <Link to = "/home" className="nav-link">Home <span className="sr-only">(current)</span></Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Dropdown</a>
                                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="#">Action</a>
+                                    <Link className="dropdown-item" to="/map">Maping</Link>
                                     <a className="dropdown-item" href="#">Another action</a>
                                     <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href="#">Something else here</a>
@@ -52,6 +52,9 @@ export const Navbar = () => {
                 <Switch>
                     <Route exact path= "/" >
                         <Chart/>
+                    </Route>
+                    <Route exact path = "/map">
+                        <Map/>
                     </Route>
                 </Switch>
             </Router>

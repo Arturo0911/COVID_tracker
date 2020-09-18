@@ -40,7 +40,6 @@ export const Chart = (props) => {
                                         <td>
                                             <a href="#" className = "btn btn-info">Visualizar</a>
                                         </td>
-                                       
                                     </tr>
                                 ))
                             }
