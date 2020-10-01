@@ -170,3 +170,18 @@ def fetch_deaths_acumulative(country):
         return object_deaths[country]
     else:
         return object_deaths[country]
+
+
+
+def _view_countries():
+    new_countries = list()
+    with open('prediction_model/csv/WHO-COVID-19-global-data.csv',encoding='utf-8-sig') as f:
+
+        reader = csv.DictReader(f)
+
+        for x in reader:
+
+            if (x[' Country'] not in new_countries):
+                new_countries.append(x[' Country'])
+    
+    return new_countries
