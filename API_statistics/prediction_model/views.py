@@ -43,20 +43,7 @@ def Link(request):
 
 def Country_selector(request):  # url country
     country_values = index.get_countries()
-
-    """
-    otra_lista = []
-
-    print(index._view_countries())
-    print(len(index._view_countries()))
-
-    for x in index._view_countries():
-        
-        if x not in otra_lista:
-            print(x)
-            otra_lista.append(x)
-    """
-    
+   
     return  render(request, 'prediction_model/country.html', {'countries':country_values})
 
 @csrf_exempt
@@ -81,7 +68,7 @@ def get_values_to_country(request, country): # get country_response
     return JsonResponse({'cases':index.get_by_month(country)})
 
 def get_values_to_death_by_country(request, country):
-    #print(index.fetch_deaths_acumulative(country))
+    print(index.fetch_deaths_acumulative(country))
     return JsonResponse({'deaths':index.fetch_deaths_acumulative(country)})
 
 
