@@ -72,6 +72,7 @@ def get_values_to_death_by_country(request, country):
     return JsonResponse({'deaths':index.fetch_deaths_acumulative(country)})
 
 
-    
+def leslie (request):
 
+    return HttpResponse("Te quero mi vida uwuwuuwuwuwuwuwu <3 ")
 
